@@ -14,9 +14,11 @@ table categories {
 
 Table tickets {
   id primary
+  title varchar
   description text
   priority priority
   status status
+  comment text
   assigned_by int [ref: > users.id]
   assigned_to int [ref: > users.id]
 }
