@@ -31,9 +31,14 @@ class CategoryResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->unique()
+                    
+                    // mengoptimalkan performa dengan menunda eksekusi validasi hingga input selesai
+                    ->lazy()
                     ->autofocus()
-                    ->afterStateUpdated(function (Set $set) {
 
+                    // Automatically generate slug when name is updated
+                    ->afterStateUpdated(function (Set $set,?string $state) {
+                        $set('slug',str()->slug($state));
                     }),
 
                 TextInput::make('slug')
