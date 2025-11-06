@@ -12,6 +12,7 @@ class CreateTicket extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        // error merah pada id disebabkan oleh laravel versi terbaru yang mengharuskan penulisan auth()->id() bukan auth()->user()->id(). tidak ada perubahan fungsi
         $data['assigned_by'] = auth()->id();
 
         return $data;
