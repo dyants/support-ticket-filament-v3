@@ -38,11 +38,14 @@ class TicketResource extends Resource
                     ->autofocus(),
                 TextArea::make('description')
                     ->rows(3),
-                    Select::make('status')->options (Ticket::STATUS)
+                    Select::make('status')->options (self::$model::STATUS)
+                    ->required()
+                    ->in(self::$model::STATUS),
+                    Select::make('priority')->options (self::$model::PRIORITY)
+                    ->required()
+                    ->in(self::$model::PRIORITY),
+                    Select::make('assigned_to')->relationship('assignedTo', 'name')
                     ->required(),
-                    Select::make('priority')->options (Ticket::PRIORITY)
-                    ->required(),
-                    Select::make('assigned_to')->relationship('assignedTo', 'name'),
                     TextArea::make('comment')
                     ->rows(3),
                 ]);
